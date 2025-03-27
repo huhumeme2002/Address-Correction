@@ -9,18 +9,17 @@ import re
 def start_processing(self):
     threading.Thread(target=self.process_addresses, daemon=True).start()
 
-# Danh sách API key (bạn có thể thêm nhiều key vào đây)
+# Danh sách API key
 API_KEYS = [
-    'AIzaSyCrOZPI7gPCLn0kS2iHV_MSNiO-uu7OC7c',  # API key 1
-    'AIzaSyCnRLE-ChDSyfJPwp2A4MTNOYGt4rkbQAA',
-    'AIzaSyDMb7I4HkFac8OvQEA55XX-3vZkn06xAbo'   # API key 3
+    '',  
+    '',
+    ''   
 ]
 
 def setup_model(api_key):
     genai.configure(api_key=api_key)
     return genai.GenerativeModel('gemini-2.0-flash')
 
-# Chúng ta không cần logic hoán đổi dòng vì bây giờ mô hình chỉ trả về 1 dòng duy nhất
 DEFAULT_PROMPT = """Hãy kiểm tra các địa chỉ sau:
 - Nếu địa chỉ thuộc thành phố Hồ Chí Minh, hãy sửa chính tả và định dạng lại địa chỉ theo chuẩn Việt Nam và thêm "Hồ Chí Minh" ở cuối.
 - Nếu địa chỉ không thuộc thành phố Hồ Chí Minh, hãy tự xác định tên tỉnh của địa chỉ đó, sửa chính tả và định dạng lại, và đặt tên tỉnh tìm được ở cuối.
